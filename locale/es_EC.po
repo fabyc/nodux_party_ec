@@ -1,0 +1,71 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "error:party.party:"
+msgid "Invalid VAT Number \"%s\"."
+msgstr "Número de C.I./RUC \"%s\" no es válido."
+
+msgctxt "error:party.party:"
+msgid "VAT Number already exists!"
+msgstr "¡Número de C.I./RUC ya existe!"
+
+msgctxt "field:party.party,contribuyente_especial:"
+msgid "Contribuyente especial"
+msgstr ""
+
+msgctxt "field:party.party,contribuyente_especial_nro:"
+msgid "Nro. Resolucion"
+msgstr "No. resolución"
+
+msgctxt "field:party.party,mandatory_accounting:"
+msgid "Mandatory Accounting"
+msgstr "Obligado contabilidad"
+
+msgctxt "field:party.party,type_document:"
+msgid "Type Document"
+msgstr "Tipo de documento"
+
+msgctxt "help:party.party,contribuyente_especial:"
+msgid "Seleccione solo si es contribuyente especial"
+msgstr ""
+
+msgctxt "help:party.party,contribuyente_especial_nro:"
+msgid "Contribuyente Especial Nro."
+msgstr "Contribuyente especial No."
+
+msgctxt "selection:party.party,mandatory_accounting:"
+msgid ""
+msgstr ""
+
+msgctxt "selection:party.party,mandatory_accounting:"
+msgid "No"
+msgstr ""
+
+msgctxt "selection:party.party,mandatory_accounting:"
+msgid "Si"
+msgstr ""
+
+msgctxt "selection:party.party,type_document:"
+msgid ""
+msgstr ""
+
+msgctxt "selection:party.party,type_document:"
+msgid "Cedula"
+msgstr "Cédula"
+
+msgctxt "selection:party.party,type_document:"
+msgid "Consumidor Final"
+msgstr ""
+
+msgctxt "selection:party.party,type_document:"
+msgid "Pasaporte"
+msgstr ""
+
+msgctxt "selection:party.party,type_document:"
+msgid "RUC"
+msgstr ""
+
+msgctxt "view:party.party:"
+msgid "VAT"
+msgstr "CI/RUC"
