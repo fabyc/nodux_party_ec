@@ -33,8 +33,10 @@ class Party:
         if self.type_document == '07':
             res ['vat_number']= '9999999999999'
         else:
-            res ['vat_number']= ''
-        
+            if self.vat_number:
+                res ['vat_number']= self.vat_number
+            else:
+                res ['vat_number']= ''
         return res
     
     @staticmethod
@@ -47,6 +49,7 @@ class Party:
         
     @fields.depends('type_document', 'vat_number')
     def on_change_vat_number(self):
+        res={}
         if self.type_document == '':
             res ['vat_number']= self.vat_number
             return res
@@ -58,7 +61,7 @@ class Party:
             return res
         else:
             if self.vat_number:
-                res={}
+                res ['vat_number']= self.vat_number
                 valido = self.pre_validate()
             if valido == None:
                 res ['vat_number']= self.vat_number
