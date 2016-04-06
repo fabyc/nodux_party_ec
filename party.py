@@ -22,7 +22,9 @@ class Party:
             ('vat_number', 'UNIQUE(vat_number)',
                 'VAT Number already exists!'),
         ]
-
+        cls.vat_number.states['readonly'] |= Eval('type_document') == '07'
+        cls.vat_number.depends.append('type_document')
+        
     @staticmethod
     def default_type_document():
         return '05'
