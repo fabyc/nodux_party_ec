@@ -13,6 +13,8 @@ __metaclass__ = PoolMeta
 class Party:
     __name__ = 'party.party'
     
+    commercial_name = fields.Char('Commercial Name')
+    
     @classmethod
     def __setup__(cls):
         super(Party, cls).__setup__()
