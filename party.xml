@@ -22,5 +22,7 @@ this repository contains the full copyright notices and license terms. -->
             <field name="name">party_form</field>
         </record>
         
+        <delete id="check_vies_keyword"/>
+
     </data>
 </tryton>
