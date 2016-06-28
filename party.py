@@ -8,13 +8,13 @@ from trytond.pyson import Id
 from trytond.pyson import Bool, Eval
 
 __all__ = ['Party']
-__metaclass__ = PoolMeta
 
 class Party:
+    __metaclass__ = PoolMeta
     __name__ = 'party.party'
-    
+
     commercial_name = fields.Char('Commercial Name')
-    
+
     @classmethod
     def __setup__(cls):
         super(Party, cls).__setup__()
@@ -26,11 +26,11 @@ class Party:
         ]
         cls.vat_number.states['readonly'] |= Eval('type_document') == '07'
         cls.vat_number.depends.append('type_document')
-        
+
     @staticmethod
     def default_type_document():
         return '05'
-        
+
     @fields.depends('type_document', 'vat_number')
     def on_change_type_document(self):
         res = {}
@@ -42,15 +42,15 @@ class Party:
             else:
                 res ['vat_number']= ''
         return res
-    
+
     @staticmethod
     def default_contribuyente_especial():
         return False
-        
+
     @staticmethod
     def default_mandatory_accounting():
         return 'NO'
-        
+
     @fields.depends('type_document', 'vat_number')
     def on_change_vat_number(self):
         res={}
@@ -64,13 +64,14 @@ class Party:
             res ['vat_number']= self.vat_number
             return res
         else:
+            valido = ""
             if self.vat_number:
                 res ['vat_number']= self.vat_number
                 valido = self.pre_validate()
             if valido == None:
                 res ['vat_number']= self.vat_number
             return res
-            
+
     @classmethod
     def search_rec_name(cls, name, clause):
         parties = cls.search([
@@ -107,7 +108,7 @@ class Party:
         factor = 2
         x = 0
         set_check_digit = None
-        
+
         if self.type_document == '04':
             # Si es RUC valide segun el tipo de tercero
             if int(raw_number[2]) < 6:
@@ -116,7 +117,7 @@ class Party:
                 type_party='entidad_publica'
             if int(raw_number[2]) == 9:
                 type_party='persona juridica'
-                
+
             if type_party == 'persona_natural':
                 if len(raw_number) != 13 or int(raw_number[2]) > 5 or raw_number[-3:] != '001':
                     return
@@ -137,7 +138,7 @@ class Party:
                 else:
                     value = 10 - (x % 10)
                 return (set_check_digit == str(value))
-                    
+
             elif type_party == 'entidad_publica':
                 if not len(raw_number) == 13 or raw_number[2] != '6' \
                     or raw_number[-3:] != '001':
@@ -153,7 +154,7 @@ class Party:
                 if value == 11:
                     value = 0
                 return (set_check_digit == str(value))
-                    
+
             else:
                 if len(raw_number) != 13 or \
                     (type_party in ['persona_juridica'] \
@@ -191,4 +192,3 @@ class Party:
             else:
                 value = 10 - (x % 10)
             return (set_check_digit == str(value))
-

@@ -8,13 +8,13 @@ from trytond.pyson import Id
 from trytond.pyson import Bool, Eval
 
 __all__ = ['Configuration']
-__metaclass__ = PoolMeta
 
 class Configuration:
+    __metaclass__ = PoolMeta
     __name__ = 'party.configuration'
- 
+
     @classmethod
     def default_party_lang(cls):
         Lang = Pool().get('ir.lang')
-        langs = Lang.search([('code','=','es_EC')])   
+        langs = Lang.search([('code','=','es_EC')])
         return langs[0].id

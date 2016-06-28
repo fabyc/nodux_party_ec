@@ -8,12 +8,11 @@ from trytond.pyson import Id
 from trytond.pyson import Bool, Eval
 
 __all__ = ['Address']
-__metaclass__ = PoolMeta
 
 class Address:
+    __metaclass__ = PoolMeta
     __name__ = 'party.address'
 
     @staticmethod
     def default_country():
         return Id('country', 'ec').pyson()
-
