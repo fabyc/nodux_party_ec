@@ -5,9 +5,12 @@ this repository contains the full copyright notices and license terms. -->
     <xpath
         expr="/form/field[@name='code']"
         position="after">
-        <newline/> 
+        <newline/>
         <label name="commercial_name"/>
         <field name="commercial_name"/>
     </xpath>
-    
+
+    <xpath  expr="/form/notebook/page[@name='identifiers']" position="replace">
+    </xpath>
+
 </data>

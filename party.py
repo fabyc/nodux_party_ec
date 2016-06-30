@@ -7,85 +7,47 @@ from trytond.pyson import Eval
 from trytond.pyson import Id
 from trytond.pyson import Bool, Eval
 
-__all__ = ['Party']
+__all__ = ['PartyIdentifier','Party']
 
-class Party:
+class PartyIdentifier():
     __metaclass__ = PoolMeta
-    __name__ = 'party.party'
+    __name__ = 'party.identifier'
+    _rec_name = 'code'
 
-    commercial_name = fields.Char('Commercial Name')
+    type_document = fields.Selection([
+                ('', ''),
+                ('04', 'RUC'),
+                ('05', 'Cedula'),
+                ('06', 'Pasaporte'),
+                ('07', 'Consumidor Final'),
+            ], 'Type Document', states={
+                'readonly': ~Eval('active', True),
+            },  depends=['active'])
 
     @classmethod
     def __setup__(cls):
-        super(Party, cls).__setup__()
+        super(PartyIdentifier, cls).__setup__()
         cls._error_messages.update({
-                'invalid_vat_number': ('Invalid VAT Number "%s".')})
+                'invalid_vat_code': ('Invalid VAT Number "%s".')})
         cls._sql_constraints += [
-            ('vat_number', 'UNIQUE(vat_number)',
+            ('code', 'UNIQUE(code)',
                 'VAT Number already exists!'),
         ]
-        cls.vat_number.states['readonly'] |= Eval('type_document') == '07'
-        cls.vat_number.depends.append('type_document')
+        cls.code.states['readonly'] = Eval('type_document') == '07'
 
     @staticmethod
     def default_type_document():
         return '05'
 
-    @fields.depends('type_document', 'vat_number')
+    @fields.depends('type_document', 'code')
     def on_change_type_document(self):
-        res = {}
         if self.type_document == '07':
-            res ['vat_number']= '9999999999999'
+            self.code = '9999999999999'
         else:
-            if self.vat_number:
-                res ['vat_number']= self.vat_number
+            if self.code:
+                self.code = self.code
             else:
-                res ['vat_number']= ''
-        return res
-
-    @staticmethod
-    def default_contribuyente_especial():
-        return False
-
-    @staticmethod
-    def default_mandatory_accounting():
-        return 'NO'
-
-    @fields.depends('type_document', 'vat_number')
-    def on_change_vat_number(self):
-        res={}
-        if self.type_document == '':
-            res ['vat_number']= self.vat_number
-            return res
-        elif self.type_document == '06':
-            res ['vat_number']= self.vat_number
-            return res
-        elif self.type_document == '07':
-            res ['vat_number']= self.vat_number
-            return res
-        else:
-            valido = ""
-            if self.vat_number:
-                res ['vat_number']= self.vat_number
-                valido = self.pre_validate()
-            if valido == None:
-                res ['vat_number']= self.vat_number
-            return res
-
-    @classmethod
-    def search_rec_name(cls, name, clause):
-        parties = cls.search([
-                ('vat_number',) + tuple(clause[1:]),
-                ], limit=1)
-        if parties:
-            return [('vat_number',) + tuple(clause[1:])]
-        return [('name',) + tuple(clause[1:])]
-
-    @classmethod
-    def validate(cls, parties):
-        for party in parties:
-            if party.type_document == '04' and bool(party.vat_number):
-                super(Party, cls).validate(parties)
+                self.code = None
 
     def pre_validate(self):
         if self.type_document == '':
@@ -93,16 +55,16 @@ class Party:
         elif self.type_document == '06':
             pass
         else:
-            if not self.vat_number:
+            if not self.code:
                 return
-            if self.vat_number == '9999999999999':
+            if self.code == '9999999999999':
                 return
-            vat_number = self.vat_number.replace(".", "")
-            if vat_number.isdigit() and len(vat_number) > 9:
-                is_valid = self.compute_check_digit(vat_number)
+            code = self.code.replace(".", "")
+            if code.isdigit() and len(code) > 9:
+                is_valid = self.compute_check_digit(code)
                 if is_valid:
                     return
-            self.raise_user_error('invalid_vat_number', (self.vat_number,))
+            self.raise_user_error('invalid_vat_code', (self.code,))
 
     def compute_check_digit(self, raw_number):
         factor = 2
@@ -192,3 +154,26 @@ class Party:
             else:
                 value = 10 - (x % 10)
             return (set_check_digit == str(value))
+
+class Party:
+    __metaclass__ = PoolMeta
+    __name__ = 'party.party'
+
+    commercial_name = fields.Char('Commercial Name')
+
+    @staticmethod
+    def default_contribuyente_especial():
+        return False
+
+    @staticmethod
+    def default_mandatory_accounting():
+        return 'NO'
+
+    @classmethod
+    def search_rec_name(cls, name, clause):
+        parties = cls.search([
+                ('vat_code',) + tuple(clause[1:]),
+                ], limit=1)
+        if parties:
+            return [('vat_code',) + tuple(clause[1:])]
+        return [('name',) + tuple(clause[1:])]

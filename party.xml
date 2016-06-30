@@ -3,24 +3,33 @@
 this repository contains the full copyright notices and license terms. -->
 <tryton>
     <data>
-        <record model="ir.property" id="property_party_lang">
+        <!--record model="ir.property" id="property_party_lang">
             <field name="field"
                 search="[('model.model', '=', 'party.configuration'), ('name', '=', 'party_lang')]"/>
             <field name="value" eval="'ir.lang,' + str(ref('ir.lang_ec'))"/>
-        </record>
+        </record-->
 
         <record model="ir.ui.view" id="party_view_tree">
             <field name="model">party.party</field>
-            <field name="type" Eval="None">
             <field name="inherit" ref="party.party_view_tree"/>
             <field name="name">party_tree</field>
         </record>
 
         <record model="ir.ui.view" id="party_view_form">
             <field name="model">party.party</field>
-            <field name="type" Eval="None">
             <field name="inherit" ref="party.party_view_form"/>
             <field name="name">party_form</field>
+        </record>
+
+        <record model="ir.ui.view" id="identifier_form">
+            <field name="model">party.identifier</field>
+            <field name="inherit" ref="party.identifier_form"/>
+            <field name="name">identifier_form</field>
+        </record>
+        <record model="ir.ui.view" id="identifier_list">
+            <field name="model">party.identifier</field>
+            <field name="inherit" ref="party.identifier_list"/>
+            <field name="name">identifier_list</field>
         </record>
 
         <delete id="check_vies_keyword"/>
