@@ -26,6 +26,8 @@ class Party:
         ]
         cls.vat_number.states['readonly'] |= Eval('type_document') == '07'
         cls.vat_number.depends.append('type_document')
+        cls.vat_number.size = 13
+        cls.name.size = 100
 
     @staticmethod
     def default_type_document():
@@ -68,7 +70,7 @@ class Party:
             name = name.replace("\n","")
             res['name'] = name
         return res
-        
+
     @classmethod
     def search_rec_name(cls, name, clause):
         parties = cls.search([
