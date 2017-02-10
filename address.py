@@ -14,6 +14,26 @@ __metaclass__ = PoolMeta
 class Address:
     __name__ = 'party.address'
 
+    @fields.depends('street')
+    def on_change_street(self):
+        res = {}
+        cont = 0
+        if self.street:
+            street = self.street.strip()
+            street = street.replace("\n","")
+            res['street'] = street
+        return res
+
+    @fields.depends('city')
+    def on_change_city(self):
+        res = {}
+        cont = 0
+        if self.city:
+            city = self.city.strip()
+            city = city.replace("\n","")
+            res['city'] = city
+        return res
+        
     @staticmethod
     def default_country():
         return Id('country', 'ec').pyson()

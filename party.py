@@ -51,6 +51,24 @@ class Party:
     def default_mandatory_accounting():
         return 'NO'
 
+    @fields.depends('vat_number')
+    def on_change_vat_number(self):
+        res = {}
+        if self.vat_number:
+            vat_number = self.vat_number.replace(" ", "").replace(".","")
+            res['vat_number'] = vat_number
+        return res
+
+    @fields.depends('name')
+    def on_change_name(self):
+        res = {}
+        cont = 0
+        if self.name:
+            name = self.name.strip()
+            name = name.replace("\n","")
+            res['name'] = name
+        return res
+        
     @classmethod
     def search_rec_name(cls, name, clause):
         parties = cls.search([
