@@ -7,4 +7,9 @@ this repository contains the full copyright notices and license terms. -->
         position="after">
         <field name="commercial_name"/>
     </xpath>
+
+    <xpath
+        expr="/tree/field[@name='lang']"
+        position="replace">
+    </xpath>
 </data>
