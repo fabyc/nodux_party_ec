@@ -14,6 +14,16 @@ class Party:
     __name__ = 'party.party'
 
     commercial_name = fields.Char('Commercial Name')
+    
+    type_document = fields.Selection([
+                ('', ''),
+                ('04', 'RUC'),
+                ('05', 'Cedula'),
+                ('06', 'Pasaporte'),
+                ('07', 'Consumidor Final'),
+            ], 'Type Document', states={
+                'readonly': ~Eval('active', True),
+            },  depends=['active'])
 
     @classmethod
     def __setup__(cls):

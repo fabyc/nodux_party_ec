@@ -5,9 +5,69 @@ this repository contains the full copyright notices and license terms. -->
     <xpath
         expr="/form/field[@name='code']"
         position="after">
-        <newline/> 
+        <newline/>
         <label name="commercial_name"/>
         <field name="commercial_name"/>
     </xpath>
-    
+
+    <xpath
+        expr="/form/notebook/page[@id='general']/field[@name='addresses']"
+        position="before">
+        <separator string="VAT" colspan="4" id="vat"/>
+        <label name="vat_number"/>
+        <field name="vat_number"/>
+    </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='general']/label[@name='vat_number']"
+        position="before">
+        <label name="type_document"/>
+        <field name="type_document"/>
+        <newline/>
+    </xpath>
+
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/separator[@id='vat']"
+        position="replace">
+    </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/field[@name='vat_number']"
+        position="replace">
+    </xpath>
+
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/label[@name='vat_number']"
+        position="replace">
+    </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/field[@name='vat_country']"
+        position="replace">
+    </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/label[@name='vat_country']"
+        position="replace">
+    </xpath>
+
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/field[@name='customer_tax_rule']"
+        position="replace">
+    </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/label[@name='customer_tax_rule']"
+        position="replace">
+    </xpath>
+
+     <xpath
+        expr="/form/notebook/page[@id='accounting']/field[@name='supplier_tax_rule']"
+        position="replace">
+    </xpath>
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/label[@name='supplier_tax_rule']"
+        position="replace">
+    </xpath>
+
+    <xpath
+        expr="/form/notebook/page[@id='accounting']/separator[@id='taxes']"
+        position="replace">
+    </xpath>
+
 </data>
