@@ -2,13 +2,17 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-msgctxt "error:party.party:"
+msgctxt "error:party.identifier:"
 msgid "Invalid VAT Number \"%s\"."
-msgstr "Número de C.I./RUC \"%s\" no es válido."
+msgstr "Numero C.I/RUC \"%s\" no es válido"
 
-msgctxt "error:party.party:"
+msgctxt "error:party.identifier:"
 msgid "VAT Number already exists!"
-msgstr "¡Número de C.I./RUC ya existe!"
+msgstr "Número C.I/RUC ya existe"
+
+msgctxt "field:party.identifier,type_document:"
+msgid "Type Document"
+msgstr "Tipo de Documento"
 
 msgctxt "field:party.party,commercial_name:"
 msgid "Commercial Name"
@@ -26,10 +30,6 @@ msgctxt "field:party.party,mandatory_accounting:"
 msgid "Mandatory Accounting"
 msgstr "Obligado contabilidad"
 
-msgctxt "field:party.party,type_document:"
-msgid "Type Document"
-msgstr "Tipo de documento"
-
 msgctxt "help:party.party,contribuyente_especial:"
 msgid "Seleccione solo si es contribuyente especial"
 msgstr ""
@@ -37,6 +37,26 @@ msgstr ""
 msgctxt "help:party.party,contribuyente_especial_nro:"
 msgid "Contribuyente Especial Nro."
 msgstr "Contribuyente especial No."
+
+msgctxt "selection:party.identifier,type_document:"
+msgid ""
+msgstr ""
+
+msgctxt "selection:party.identifier,type_document:"
+msgid "Cedula"
+msgstr ""
+
+msgctxt "selection:party.identifier,type_document:"
+msgid "Consumidor Final"
+msgstr ""
+
+msgctxt "selection:party.identifier,type_document:"
+msgid "Pasaporte"
+msgstr ""
+
+msgctxt "selection:party.identifier,type_document:"
+msgid "RUC"
+msgstr ""
 
 msgctxt "selection:party.party,mandatory_accounting:"
 msgid ""
@@ -49,26 +69,6 @@ msgstr "No"
 msgctxt "selection:party.party,mandatory_accounting:"
 msgid "Si"
 msgstr "Si"
-
-msgctxt "selection:party.party,type_document:"
-msgid ""
-msgstr ""
-
-msgctxt "selection:party.party,type_document:"
-msgid "Cedula"
-msgstr "Cédula"
-
-msgctxt "selection:party.party,type_document:"
-msgid "Consumidor Final"
-msgstr "Consumidor final"
-
-msgctxt "selection:party.party,type_document:"
-msgid "Pasaporte"
-msgstr "Pasaporte"
-
-msgctxt "selection:party.party,type_document:"
-msgid "RUC"
-msgstr "RUC"
 
 msgctxt "view:party.party:"
 msgid "VAT"
